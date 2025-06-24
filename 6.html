@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        .wrapper{
+            border:2px solid black;
+            height:100vh;
+            width: 100vw;
+            background:linear-gradient(to top right,rgba(93, 16, 144, 0.909),rgb(19, 0, 19));
+        }
+        .top1{
+            height: 80px;
+            width: 450px;
+            background-color: rgb(25, 2, 25);
+            border-bottom: 6px solid rgb(101, 20, 183);
+        }
+        .top2{
+            height: 29.3rem;
+            width: 450px;
+            background-color: rgb(25, 2, 25);
+            border-bottom: 6px solid rgb(156, 72, 240);  
+            border-radius: 1.3rem;
+        }
+        .header{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        input[type="checkbox"]{
+              width: 20px;
+              height: 20px;
+              border:2px solid black;
+              cursor: pointer; 
+              accent-color: rgb(64, 171, 210); 
+            }
+        .circle{
+            box-shadow: 0rem 0rem 1rem 0.01rem;
+        }
+     
+        .check input{
+            appearance: none;
+            border:1px solid cyan;
+            border-radius: 0.35rem;
+        }
+        .check input:checked{
+            background-color: aqua;
+            
+        }
+        .check input:checked::before{
+            content: "✓";
+            color: black;
+        }
+        .check label{
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            letter-spacing: 1.3px;
+        }
+        .slider{
+            appearance: none;
+            width: 85%;
+            height: 13px;
+            background: linear-gradient(to right, rgba(229, 225, 233, 0.482) 0%, #c300ff 0%);
+            background-repeat: no-repeat;
+        }
+        .slider::-webkit-slider-thumb{
+            appearance: none;
+            height: 2rem;
+            width: 2rem;
+            background-color:rgb(248, 244, 18);
+            border-radius: 2rem;
+            transition:all 100ms ease-in;
+        }
+        .slider::-webkit-slider-thumb:hover{
+            background-color: rgb(0, 8, 6);
+            border: 2px solid yellow;
+            
+        }
+        .slider:focus{
+            border: 2px solid yellow;
+        }
+        .slider::-webkit-slider-thumb:hover{
+            box-shadow: #d9ff00 0px 0px 30px 5px;
+        }
+        .generatorbutton{
+            border-bottom: 5px solid #850ea9;
+            height: 45px;
+            width: 350px;
+            border-radius: 20px;
+            background-color: rgb(178, 16, 211);
+            color: rgb(229, 249, 0);
+            font-size: 20px;
+            letter-spacing: 1px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+        }
+        .copybutton {
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            transform: scale(0);  
+            background-color: #c300ff;
+            font-weight:500;
+        }
+
+       .copybutton.active {
+        opacity: 1;
+        transform: scale(1);
+       }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper gap-4 flex flex-col justify-center items-center">
+
+        <div class="header text-gray-300 font-semibold text-[30px]">PASSWORD GENERATOR</div>
+        <div class="flex flex-row top1 rounded-[15px] items-center justify-between">
+            <input class="translate-x-4 text-yellow-400 text-[28px] font-semibold " readonly placeholder="PASSWORD" generatedtext></input>
+            <div class="copybutton  h-7.5 translate-x-9 -translate-y-9 w-15 text-[18px]  flex justify-around items-center text-yellow-300 rounded-[15px] " copymessage></div>
+            <button class="border-2 w-8 h-8 border-white -translate-x-4 rounded-[4px] cursor-pointer " copybutton>
+                <div class=""><img src="https://png.pngtree.com/png-vector/20190329/ourlarge/pngtree-vector-copy-icon-png-image_889395.jpg" class="h-7 w-7"></img></div> 
+            </button>  
+            </div>
+            <div class="top2 flex flex-col justify-around items-center ">
+                <div class="flex flex-row items-center justify-between gap-45">
+                    <div class="text-[1.7rem] text-amber-100 ">Password Length</div>
+                    <div class="text-[1.7rem] text-amber-300 " data-lengthnumber></div>
+                </div>
+
+            <input type="range" min="1" max="20" step="1" class="slider w-95 rounded-[200px] " data-lengthSlider></input>
+
+            <div class="text-white font-bold -translate-x-20 flex items-center check">
+                <input type="checkbox" class="largercheckbox" uppercasebox>
+                <label for="uppercase" class="translate-x-4">Include Uppercase Letters</label>
+            </div>
+        
+             <div class="text-white font-bold -translate-x-20  flex items-center check">
+                <input type="checkbox" class="largercheckbox" lowercasebox checked>
+                <label for="lowercase" class="translate-x-4">Include Lowercase Letters</label>
+            </div>
+
+             <div class="text-white font-bold -translate-x-30.5  flex items-center check">
+                <input type="checkbox" class="largercheckbox" numberbox>
+                <label for="numbers" class="translate-x-4">Include Numbers</label>
+            </div>
+
+             <div class="text-white font-bold -translate-x-31  flex items-center check">
+                <input type="checkbox" class="largercheckbox" symbolbox>
+                <label for="symbols" class="translate-x-4">Include Symbols</label>
+            </div>
+
+            <div class="text-white flex flex-row justify-around items-center ">
+                <div class="-translate-x-36 text-[25px]">Strength</div>
+                <div class="circle translate-x-35 h-6 w-6 shadow-white bg-white rounded-2xl" coloredcircle></div>
+            </div>
+           <button  class="border-2 border-white text-white cursor-pointer generatorbutton" generator> 
+                GENERATE PASSWORD
+            </button>
+
+        </div>
+
+        <script src="6.js"></script>
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
